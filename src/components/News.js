@@ -16,21 +16,26 @@ const News = (props)=>{
     } 
 
     const updateNews = async ()=> {
-        props.setProgress(10);
-        const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=5bd5b1171ae6469d9dcd70f146d7f8fc&page=${page}&pageSize=${props.pageSize}`; 
-        setLoading(true)
-        let data = await fetch(url);
-        props.setProgress(30);
-        let parsedData = await data.json()
-        props.setProgress(70);
-        setArticles(parsedData.articles)
-        setTotalResults(parsedData.totalResults)
-        setLoading(false)
-        props.setProgress(100);
+        try {
+            
+            props.setProgress(10);
+            const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=5bd5b1171ae6469d9dcd70f146d7f8fc&page=${page}&pageSize=${props.pageSize}`; 
+            setLoading(true)
+            let data = await fetch(url);
+            props.setProgress(30);
+            let parsedData = await data.json()
+            props.setProgress(70);
+            setArticles(parsedData.articles)
+            setTotalResults(parsedData.totalResults)
+            setLoading(false)
+            props.setProgress(100);
+        } catch (error) {
+            alert("Your API is not working Properly")
+        }
     }
 
     useEffect(() => {
-        document.title = `${capitalizeFirstLetter(props.category)} - NewsMonkey`;
+        document.title = `${capitalizeFirstLetter(props.category)} - NewsMinner`;
         updateNews(); 
         // eslint-disable-next-line
     }, [])
