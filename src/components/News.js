@@ -90,3 +90,6 @@ News.propTypes = {
 }
 
 export default News
+
+
+// test commit
